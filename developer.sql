@@ -93,8 +93,7 @@ begin
 
         if @SeatsAvailable <= 0
         begin
-            raiserror('No available economy seats for this flight.', 16, 1);
-            rollback transaction;
+            throw 50000, 'No available economy seats for this flight.', 1;
         end
     end
     else if @TicketClass = 'Business'
@@ -105,8 +104,7 @@ begin
 
         if @SeatsAvailable <= 0
         begin
-            raiserror('No available business seats for this flight.', 16, 1);
-            rollback transaction;
+            throw 50000, 'No available business seats for this flight.', 1;
         end
     end
 end;
